@@ -1,1 +1,1 @@
-web: gunicorn NSAHELP.wsgi --log-file -
+web: gunicorn nsahelp.wsgi --log-file -
