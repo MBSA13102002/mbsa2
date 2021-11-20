@@ -45,7 +45,8 @@ qrcode_.callback = res => {
     canvasElement.hidden = true;
     btnScanQR.hidden = false;
     MobileNumber = firebase.database().ref("_Attendance_").child(res).set({
-      verified:1
+      verified:1,
+       rollno:rollno
     })
     
   }
