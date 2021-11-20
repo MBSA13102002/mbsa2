@@ -1,6 +1,14 @@
 
-
-
+ function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(showPosition);
+  } else {
+    div.innerHTML = "The Browser Does not Support Geolocation";
+  }
+}
+function showPosition(position) {
+  div.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+}
 
 const rollno = prompt("Enter Your NITK Roll Number!!!")
 
@@ -36,18 +44,10 @@ qrcode_.callback = res => {
     qrResult.hidden = false;
     canvasElement.hidden = true;
     btnScanQR.hidden = false;
-    if(res=="suzS69d7CMOtNBDDootsQOrHXhV2"){
-      firebase.database().ref("Attendace").child(rollno.toString()).child(datetime.toString()).push({
-        type:"out"
-      })
-      alert("You are Outside Hostel Now!!")
-    }
-    else if(res=="rQuwDXhfTXatUMeWbegbZbU3NqL2"){
-      firebase.database().ref("Attendace").child(rollno.toString()).child(datetime.toString()).push({
-        type:"in"
-      })
-      alert("You are Inside Hostel Now!!")
-    }
+    MobileNumber = firebase.database().ref("_Attendance_").child(res).set({
+      verified:1
+    })
+    
   }
 };
 
